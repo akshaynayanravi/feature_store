@@ -1,0 +1,34 @@
+CREATE TABLE Features (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    description TEXT,
+    data_type ENUM('integer', 'float', 'string', 'boolean', 'datetime') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE FeatureValues (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    feature_id INT NOT NULL,
+    feature_value VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE Models (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE ModelFeatures (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    model_id INT NOT NULL,
+    feature_id INT NOT NULL,
+    UNIQUE KEY unique_model_feature (model_id, feature_id)
+);
